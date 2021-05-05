@@ -1,22 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class HomeScreen extends JFrame{
+public class GameInstanceTest extends JFrame {
 
     int count =0;
     JLabel label;
 
-    public HomeScreen(){
+    public void GameInstanceTest(JFrame frame){
 
-        JFrame frame = new JFrame();
+        JFrame newframe = frame;
 
         TestButton buttonInstance = new TestButton();
         JButton button = buttonInstance.createButton(1);
         //button.addActionListener(this);
 
-        label = new JLabel("antal rätt: 0");
+        label = new JLabel("wow vad hände här?");
 
 
         JPanel panel = new JPanel();
@@ -31,15 +29,4 @@ public class HomeScreen extends JFrame{
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new HomeScreen();
-    }
-/*
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        count++;
-        label.setText("antal rätt:" + count);
-    }
-
- */
 }
