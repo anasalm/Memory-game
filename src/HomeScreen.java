@@ -4,27 +4,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HomeScreen extends JFrame implements ActionListener{
-    private JButton button;
+    private JButton startButton;
     private JPanel panel;
     private JFrame frame;
     int count =0;
     JLabel label;
 
-    public HomeScreen(){
+    public HomeScreen(boolean visible ){
 
        // trying to
 
-        button = new JButton("Start");
-        button.addActionListener(this);
+        startButton = new JButton("Start");
+        startButton.addActionListener(this);
         panel = new JPanel();
-        panel.add(button);
+        panel.add(startButton);
 
         frame = new JFrame();
         frame.add(panel, BorderLayout.SOUTH);
         frame.setTitle("Memory");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
-        frame.setVisible(true);
+        System.out.println(visible);
+        frame.setVisible(visible);
+        frame.pack();
 
 
 
@@ -32,7 +34,7 @@ public class HomeScreen extends JFrame implements ActionListener{
         TestButton buttonInstance = new TestButton();
         JButton button = buttonInstance.createButton(1);
         //button.addActionListener(this);
-
+/*
         label = new JLabel("antal rätt: 0");
 
 
@@ -46,17 +48,40 @@ public class HomeScreen extends JFrame implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+ */
     }
 
     public static void main(String[] args) {
-        new HomeScreen();
+
+        new HomeScreen(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+
+        /*
+        Memory memory = new Memory();
+        memory.Start();
+
+         */
         System.out.println("let's start");
+
+    }
+    /*
+    this method will be called when we click "Start"
+    Start button must disappear and a new page with 16 images
+    ( let's start with just 16 images) will come up and the timer will start.
+     */
+    public void Start() {
+        HomeScreen homeScreen = new HomeScreen(false);
+        frame.remove(panel);
+
+        System.out.println("hej");
     }
 }
+
 
 
 
