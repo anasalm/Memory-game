@@ -63,9 +63,11 @@ public class HomeScreen extends JFrame implements ActionListener{
 
         /*
         Memory memory = new Memory();
-        memory.Start();
+        memory.
+
 
          */
+        Start();
         System.out.println("let's start");
 
     }
@@ -77,8 +79,10 @@ public class HomeScreen extends JFrame implements ActionListener{
     public void Start() {
         HomeScreen homeScreen = new HomeScreen(false);
         frame.remove(panel);
+        frame.setVisible(true);
 
         System.out.println("hej");
+        System.out.println("branch Anas1");
     }
 }
 
