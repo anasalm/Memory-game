@@ -13,6 +13,6 @@ public class Board extends JFrame {
     ( let's start with just 16 images) will come up and the timer will start.
      */
     public void Start(){
-
+        HomeScreen homeScreen = new HomeScreen();
     }
 }
