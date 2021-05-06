@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,16 +20,27 @@ private  ImageIcon image;
         }catch (Exception  e){
             System.out.println("Image cannot be found!!");
         }
+        Image scaled = scaleImage(image.getImage(),100,100);
+
+        int w = image.getIconWidth();
+        int h = image.getIconHeight();
+        System.out.println(w);
 
         JLabel label = new JLabel("hej");
-        label.setIcon(image);
+        ImageIcon scaledImage  = new ImageIcon(scaled);
+        label.setIcon(scaledImage);
         JFrame frame = new JFrame();
         frame.add(label);
         frame.setVisible(true);
         frame.setSize(2000, 3000);
     }
+    private Image scaleImage(Image image, int w, int h) {
+
+        Image scaled1 = image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+        return scaled1;
+    }
     public void boardVisible(){
-        /*
+
         JFrame frame1 = new JFrame();
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setSize(500,500);
@@ -44,7 +56,7 @@ private  ImageIcon image;
         frame1.add(new JLabel("hej"));
         frame1.setVisible(true);
 
-         */
+
 
     }
 
