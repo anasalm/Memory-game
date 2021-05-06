@@ -3,14 +3,31 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomeScreen extends JFrame{
-
+public class HomeScreen extends JFrame implements ActionListener{
+    private JButton button;
+    private JPanel panel;
+    private JFrame frame;
     int count =0;
     JLabel label;
 
     public HomeScreen(){
 
-        JFrame frame = new JFrame();
+       // trying to
+
+        button = new JButton("Start");
+        button.addActionListener(this);
+        panel = new JPanel();
+        panel.add(button);
+
+        frame = new JFrame();
+        frame.add(panel, BorderLayout.SOUTH);
+        frame.setTitle("Memory");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
+        frame.setVisible(true);
+
+
+
 
         TestButton buttonInstance = new TestButton();
         JButton button = buttonInstance.createButton(1);
@@ -34,12 +51,20 @@ public class HomeScreen extends JFrame{
     public static void main(String[] args) {
         new HomeScreen();
     }
-/*
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("let's start");
+    }
+}
+
+
+
+/*
+@Override
+public void actionPerformed(ActionEvent e) {
         count++;
         label.setText("antal rätt:" + count);
-    }
+        }
 
- */
-}
+        */

@@ -15,7 +15,7 @@ public class TestButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("klick");
-        newInstance.GameInstanceTest(frame);
+        //newInstance.GameInstanceTest(frame);
         //button.setVisible(false);
 
     }
