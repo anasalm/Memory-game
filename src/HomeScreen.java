@@ -7,6 +7,7 @@ public class HomeScreen extends JFrame implements ActionListener{
     private JButton startButton;
     private JPanel panel;
     private JFrame frame;
+
     int count =0;
     JLabel label;
 
@@ -52,9 +53,14 @@ public class HomeScreen extends JFrame implements ActionListener{
  */
     }
 
+
     public static void main(String[] args) {
 
         new HomeScreen(true);
+        HomeScreen homeScreen  = new HomeScreen(true);
+
+
+
     }
 
     @Override
@@ -77,9 +83,9 @@ public class HomeScreen extends JFrame implements ActionListener{
     public void Start() {
         HomeScreen homeScreen = new HomeScreen(false);
         frame.remove(panel);
-
         System.out.println("hej");
     }
+
 }
 
 
