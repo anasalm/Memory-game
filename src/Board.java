@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class Board extends JFrame {
 
+    private JFrame frame;
+    private JPanel panel;
 private  ImageIcon image;
     Board() {
 
@@ -18,10 +20,18 @@ private  ImageIcon image;
      * add images to the table.
      */
     public void makeLabels(){
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Memory");
         frame.setSize(500,500);
         frame.setLayout(new GridLayout(4,4,50,50));
+
+        panel =new JPanel();
+        panel.setSize(4000,4000);
+        panel.setBackground(Color.CYAN);
+        panel.setLayout(new GridLayout(4,4,50,50));
+
+
 
         List<JLabel> labelList = new ArrayList<>();
 
@@ -42,8 +52,11 @@ private  ImageIcon image;
 
             //Add every card two times
             JLabel label  = new JLabel();
+
             label.setIcon(scaledImage);
             labelList.add(label);
+            //panel.add(scaledImage);
+
 
             JLabel label1 = new JLabel();
             label1.setIcon(scaledImage);
@@ -54,11 +67,11 @@ private  ImageIcon image;
         Random rand =new Random();
         for (int j = 0; j < 16; j++) {
             int randomIndex = rand.nextInt(labelList.size());
+            //panel.add(labelList.get(randomIndex));
             frame.add(labelList.get(randomIndex));
             labelList.remove(randomIndex);
         }
-
-
+        //frame.add(panel);
         frame.setVisible(true);
         frame.pack();
     }
@@ -78,7 +91,10 @@ private  ImageIcon image;
             JLabel labelTest = new JLabel("hej");
             frame1.add(labelTest);
         }
-        frame1.setVisible(true);
+
+
+       // frame1.setVisible(true);
+
 /*
         frame1.add(new JLabel("hej"));
         frame1.add(new JLabel("hej"));
