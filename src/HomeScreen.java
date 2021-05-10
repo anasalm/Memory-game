@@ -16,6 +16,8 @@ public class HomeScreen extends JFrame implements ActionListener{
        // trying to
 
         startButton = new JButton("Start");
+        startButton.setFocusable(false);//Vet inte vad den här gör
+        setBounds(100,160,200,40);
         startButton.setPreferredSize(new Dimension(100,100));
         startButton.addActionListener(this);
         panel = new JPanel();
@@ -63,7 +65,9 @@ public class HomeScreen extends JFrame implements ActionListener{
        // HomeScreen(false)
 
        frame.remove(startButton);
-       repaint();
+       frame.dispose();
+
+     //  repaint();
        //frame.setVisible(true);
         System.out.println("hej");
     }
@@ -71,6 +75,10 @@ public class HomeScreen extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         System.out.println("let's start");
         Start();
+        if(e.getSource()==startButton){
+            Board board = new Board();
+        }
+
 
     }
     public static void main(String[] args) {
