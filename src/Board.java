@@ -58,6 +58,9 @@ private  ImageIcon image;
             label.setIcon(scaledImage);
             labelList.add(label);
             label.setBorder(board);
+            JPanel panel = new JPanel();
+            panel.add(label);
+
 
             //panel.add(scaledImage);
 
@@ -65,6 +68,9 @@ private  ImageIcon image;
             label1.setIcon(scaledImage);
             labelList.add(label1);
             label1.setBorder(board);
+
+            JPanel panel1 = new JPanel();
+            panel1.add(label1);
         }
 
         //
