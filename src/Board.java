@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +15,9 @@ public class Board extends JFrame {
     private JPanel panel;
     private final int numberOfImages =8 ;
     private final int numberOfCards = 16 ;
+    JButton[] buttonList;
+    int l=0;
+    boolean clickedOnce;
 private  ImageIcon image;
     Board() {
         makeLabels();
@@ -92,16 +97,35 @@ private  ImageIcon image;
         frame3.setSize(5000,5000);
         frame3.setLayout(new GridLayout(4,4,50,50));
 
-        List<JButton> buttonList = new ArrayList<>();
+        buttonList = new JButton[numberOfCards];
 
+        TestButton testButton = new TestButton();
 
-        for (int i = 0; i < numberOfCards; i++) {
-            JButton button = new JButton();
+        for (int i=0; i < numberOfCards; i++) {
+            JButton button = testButton.createButton(i);
+
             button.setPreferredSize(new Dimension(100,100));
             button.setBackground(Color.CYAN);
-            JPanel panel = new JPanel();
-            frame3.add(button);
-            buttonList.add(button);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(button.isOpaque()==false){
+                        button.setOpaque(true);
+                        button.setContentAreaFilled(true);
+                        button.setBorderPainted(true);
+                    }
+                    else {
+                        System.out.println(button.getText());
+                        button.setOpaque(false);
+                        button.setContentAreaFilled(false);
+                        button.setBorderPainted(false);
+                        System.out.println(l);
+                        l++;
+                    }
+                }
+            });
+            buttonList[i] = button;
+            frame3.add(buttonList[i]);
         }
         frame3.setVisible(true);
         frame3.pack();
@@ -129,4 +153,9 @@ private  ImageIcon image;
          //frame1.setVisible(true);
     }
 
+
+
+    public void whatHappensWhenClicked(){
+
+    }
 }
