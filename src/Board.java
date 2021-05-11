@@ -60,6 +60,7 @@ private  ImageIcon image;
 
             button.setPreferredSize(new Dimension(100,100));
             button.setBackground(Color.CYAN);
+            button.setBorder(board);
 
             button.addActionListener(new ActionListener() {
                 @Override
@@ -68,7 +69,7 @@ private  ImageIcon image;
                       //  System.out.println(button.getText());
                         button.setOpaque(false);
                         button.setContentAreaFilled(false);
-                        button.setBorderPainted(false);
+                        //button.setBorderPainted(false);
                         button.setIcon(button.getDisabledIcon());
                         //button.getIcon();
                       //  button.
@@ -80,7 +81,7 @@ private  ImageIcon image;
                         System.out.println(button.getText());
                         button.setOpaque(false);
                         button.setContentAreaFilled(false);
-                        button.setBorderPainted(false);
+                        //button.setBorderPainted(false);
                         button.setIcon(button.getDisabledIcon());
                         timesClicked++;
                         System.out.println(l);
@@ -92,7 +93,8 @@ private  ImageIcon image;
                             buttonList[g].setOpaque(true);
                             buttonList[g].setContentAreaFilled(true);
                             buttonList[g].setBorderPainted(true);
-                            buttonList[g].setDisabledIcon(buttojn);
+                            buttonList[g].setIcon(null);
+                            //button.setIcon(button.getDisabledIcon());
                         }
                         timesClicked = 0;
                     }
