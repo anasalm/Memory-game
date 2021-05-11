@@ -10,7 +10,7 @@ public class GameInstanceTest extends JFrame {
 
         JFrame newframe = frame;
 
-        TestButton buttonInstance = new TestButton();
+        MemoryButton buttonInstance = new MemoryButton();
         JButton button = buttonInstance.createButton(1);
         //button.addActionListener(this);
 
