@@ -4,10 +4,10 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.Delayed;
+import java.util.concurrent.TimeUnit;
 
 public class Board extends JFrame {
 
@@ -17,31 +17,94 @@ public class Board extends JFrame {
     private final int numberOfCards = 16 ;
     JButton[] buttonList;
     int l=0;
-    boolean clickedOnce;
+    int timesClicked = 0;
+    Icon[] imageList;
+
+
 private  ImageIcon image;
     Board() {
-        makeLabels();
+        boardOfButtons();
     }
 
 
-    /**
-     * add images to the table.
-     */
-    public void makeLabels(){
+    public void boardOfButtons(){
+
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Memory");
         frame.setSize(500,500);
         frame.setLayout(new GridLayout(4,4,50,50));
-
-        panel =new JPanel();
-        panel.setSize(4000,4000);
-        panel.setBackground(Color.CYAN);
-        panel.setLayout(new GridLayout(4,4,50,50));
+/**
+ panel =new JPanel();
+ panel.setSize(4000,4000);
+ panel.setBackground(Color.CYAN);
+ panel.setLayout(new GridLayout(4,4,50,50));
+ */
 
         Border board = BorderFactory.createLineBorder(Color.BLACK,5);
 
+
         List<JLabel> labelList = new ArrayList<>();
+        //JFrame frame3 = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(5000,5000);
+        frame.setLayout(new GridLayout(4,4,50,50));
+
+        buttonList = new JButton[numberOfCards];
+
+        TestButton testButton = new TestButton();
+
+        for (int i=0; i < numberOfCards; i++) {
+
+            JButton button = new JButton("m" + (i + 1));
+
+            button.setPreferredSize(new Dimension(100,100));
+            button.setBackground(Color.CYAN);
+
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(timesClicked==0){
+                      //  System.out.println(button.getText());
+                        button.setOpaque(false);
+                        button.setContentAreaFilled(false);
+                        button.setBorderPainted(false);
+                        button.setIcon(button.getDisabledIcon());
+                        //button.getIcon();
+                      //  button.
+                        timesClicked++;
+                        System.out.println(l);
+                        l++;
+                    }
+                    else if(timesClicked ==1){
+                        System.out.println(button.getText());
+                        button.setOpaque(false);
+                        button.setContentAreaFilled(false);
+                        button.setBorderPainted(false);
+                        button.setIcon(button.getDisabledIcon());
+                        timesClicked++;
+                        System.out.println(l);
+                        l++;
+
+                    }
+                    else if(timesClicked == 2) {
+                        for(int g=0; g <buttonList.length; g++) {
+                            buttonList[g].setOpaque(true);
+                            buttonList[g].setContentAreaFilled(true);
+                            buttonList[g].setBorderPainted(true);
+                            buttonList[g].setDisabledIcon(buttojn);
+                        }
+                        timesClicked = 0;
+                    }
+                }
+            });
+
+            buttonList[i] = button;
+            frame.add(buttonList[i]);
+        }
+
+
+        imageList = new Icon[numberOfCards];
 
         for (int i = 0; i < numberOfImages; i++) {
             //image name
@@ -57,32 +120,55 @@ private  ImageIcon image;
             //scale the images
             Image scaled = scaleImage(image.getImage(),100,100);
             ImageIcon scaledImage  = new ImageIcon(scaled);
+            imageList[i] = scaledImage;
+            imageList[numberOfImages + i] = scaledImage;
+
 
             //Add every card two times
             JLabel label  = new JLabel();
-            label.setIcon(scaledImage);
+            //buttonList[i].setIcon(scaledImage);
             labelList.add(label);
-            label.setBorder(board);
+            //buttonList[i].setBorder(board);
 
             //panel.add(scaledImage);
 
             JLabel label1 = new JLabel();
-            label1.setIcon(scaledImage);
+            //buttonList[i].setIcon(scaledImage);
             labelList.add(label1);
             label1.setBorder(board);
         }
 
+        Collections.shuffle(Arrays.asList(imageList));
+
+        for(int e = 0; e < imageList.length; e ++){
+            buttonList[e].setDisabledIcon(imageList[e]);
+        }
         //
+/**
         Random rand =new Random();
         for (int j = 0; j < numberOfCards; j++) {
             int randomIndex = rand.nextInt(labelList.size());
             //panel.add(labelList.get(randomIndex));
-            frame.add(labelList.get(randomIndex));
+            //frame.add(labelList.get(randomIndex));
             labelList.remove(randomIndex);
         }
+ */
+
         //frame.add(panel);
         frame.setVisible(true);
         frame.pack();
+        frame.setVisible(true);
+        frame.pack();
+    }
+
+
+
+    /**
+     * add images to the table.
+     */
+    public void makeLabels(){
+
+
     }
     private Image scaleImage(Image image, int w, int h) {
 
@@ -91,47 +177,7 @@ private  ImageIcon image;
     }/**
      *trying to make a new frame with buttons. when we click the buttons a card will show up
      */
-    public void boardOfButtons(){
-        JFrame frame3 = new JFrame();
-        frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame3.setSize(5000,5000);
-        frame3.setLayout(new GridLayout(4,4,50,50));
 
-        buttonList = new JButton[numberOfCards];
-
-        TestButton testButton = new TestButton();
-
-        for (int i=0; i < numberOfCards; i++) {
-            JButton button = testButton.createButton(i);
-
-            button.setPreferredSize(new Dimension(100,100));
-            button.setBackground(Color.CYAN);
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if(button.isOpaque()==false){
-                        button.setOpaque(true);
-                        button.setContentAreaFilled(true);
-                        button.setBorderPainted(true);
-                    }
-                    else {
-                        System.out.println(button.getText());
-                        button.setOpaque(false);
-                        button.setContentAreaFilled(false);
-                        button.setBorderPainted(false);
-                        System.out.println(l);
-                        l++;
-                    }
-                }
-            });
-            buttonList[i] = button;
-            frame3.add(buttonList[i]);
-        }
-        frame3.setVisible(true);
-        frame3.pack();
-    }
-
-    
 
     public static void main(String[] args) {
         Board board = new Board();
