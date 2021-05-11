@@ -26,7 +26,7 @@ public class Board extends JFrame {
 
     private  ImageIcon image;
     Board() {
-        boardOfButtons();
+     //   boardOfButtons();
     }
 
 
