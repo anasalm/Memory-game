@@ -1,3 +1,4 @@
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -23,7 +24,7 @@ public class Board extends JFrame {
     JButton tempButton;
 
 
-private  ImageIcon image;
+    private  ImageIcon image;
     Board() {
         boardOfButtons();
     }
@@ -53,13 +54,14 @@ private  ImageIcon image;
         frame.setLayout(new GridLayout(4,4,50,50));
 
         buttonList = new JButton[numberOfCards];
+        List<JButton> buttonList1 = new ArrayList<>();
 
         TestButton testButton = new TestButton();
 
         for (int i=0; i < numberOfCards; i++) {
 
             JButton button = new JButton("m" + (i + 1));
-
+            buttonList1.add(button);
             button.setPreferredSize(new Dimension(100,100));
             button.setBackground(Color.CYAN);
             button.setBorder(board);
@@ -68,13 +70,13 @@ private  ImageIcon image;
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(timesClicked==0){
-                      //  System.out.println(button.getText());
+                        //  System.out.println(button.getText());
                         button.setOpaque(false);
                         button.setContentAreaFilled(false);
                         //button.setBorderPainted(false);
                         button.setIcon(button.getDisabledIcon());
                         //button.getIcon();
-                      //  button.
+                        //  button.
                         tempIcon = button.getIcon();
                         tempButton = button;
 
@@ -90,8 +92,10 @@ private  ImageIcon image;
                         button.setIcon(button.getDisabledIcon());
                         if(button.getIcon().equals(tempIcon)){
                             System.out.println("YOU GOT A PAIR");
-                            button.removeAll();
-                            tempButton.removeAll();
+                            //button.removeAll();
+                            //tempButton.removeAll();
+                            buttonList1.remove(button);
+                            buttonList1.remove(tempButton);
                         }
                         timesClicked++;
                         System.out.println(l);
@@ -99,11 +103,18 @@ private  ImageIcon image;
 
                     }
                     else if(timesClicked == 2) {
-                        for(int g=0; g <buttonList.length; g++) {
+                        for(int g=0; g <buttonList1.size(); g++) {
+                            /*
                             buttonList[g].setOpaque(true);
                             buttonList[g].setContentAreaFilled(true);
                             buttonList[g].setBorderPainted(true);
                             buttonList[g].setIcon(null);
+
+                             */
+                            buttonList1.get(g).setOpaque(true);
+                            buttonList1.get(g).setContentAreaFilled(true);
+                            buttonList1.get(g).setBorderPainted(true);
+                            buttonList1.get(g).setIcon(null);
                             //button.setIcon(button.getDisabledIcon());
                         }
                         timesClicked = 0;
@@ -157,13 +168,13 @@ private  ImageIcon image;
         }
         //
 /**
-        Random rand =new Random();
-        for (int j = 0; j < numberOfCards; j++) {
-            int randomIndex = rand.nextInt(labelList.size());
-            //panel.add(labelList.get(randomIndex));
-            //frame.add(labelList.get(randomIndex));
-            labelList.remove(randomIndex);
-        }
+ Random rand =new Random();
+ for (int j = 0; j < numberOfCards; j++) {
+ int randomIndex = rand.nextInt(labelList.size());
+ //panel.add(labelList.get(randomIndex));
+ //frame.add(labelList.get(randomIndex));
+ labelList.remove(randomIndex);
+ }
  */
 
         //frame.add(panel);
@@ -208,7 +219,7 @@ private  ImageIcon image;
             JLabel labelTest = new JLabel("hej");
             frame1.add(labelTest);
         }
-         //frame1.setVisible(true);
+        //frame1.setVisible(true);
     }
 
 
