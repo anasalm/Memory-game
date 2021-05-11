@@ -19,6 +19,8 @@ public class Board extends JFrame {
     int l=0;
     int timesClicked = 0;
     Icon[] imageList;
+    Icon tempIcon;
+    JButton tempButton;
 
 
 private  ImageIcon image;
@@ -73,16 +75,24 @@ private  ImageIcon image;
                         button.setIcon(button.getDisabledIcon());
                         //button.getIcon();
                       //  button.
+                        tempIcon = button.getIcon();
+                        tempButton = button;
+
                         timesClicked++;
                         System.out.println(l);
                         l++;
                     }
                     else if(timesClicked ==1){
-                        System.out.println(button.getText());
+                        //System.out.println(button.getText());
                         button.setOpaque(false);
                         button.setContentAreaFilled(false);
                         //button.setBorderPainted(false);
                         button.setIcon(button.getDisabledIcon());
+                        if(button.getIcon().equals(tempIcon)){
+                            System.out.println("YOU GOT A PAIR");
+                            button.removeAll();
+                            tempButton.removeAll();
+                        }
                         timesClicked++;
                         System.out.println(l);
                         l++;
