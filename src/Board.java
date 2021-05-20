@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -11,42 +12,45 @@ public class Board extends JFrame {
 
     private JFrame frame;
     private JPanel cards_panel;
-    private final int numberOfImages =8 ;
-    private final int numberOfCards = 16 ;
+    private final int numberOfImages = 8;
+    private final int numberOfCards = 16;
 
-    int l=0;
+
+    int l = 0;
     int timesClicked = 0;
     Icon[] imageList;
     Icon tempIcon;
     JButton tempButton;
 
 
-    private  ImageIcon image;
+    private ImageIcon image;
+
     Board() {
-       boardOfButtons();
+        boardOfButtons();
     }
 
 
-    public void boardOfButtons(){
+    public void boardOfButtons() {
 
-        Border board = BorderFactory.createLineBorder(new Color(145,153,155),2);
+        Border board = BorderFactory.createLineBorder(new Color(145, 153, 155), 2);
+
 
         frame = new JFrame();
         frame.setTitle("Memory");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000,1000);
+        frame.setSize(1000, 1000);
         //  frame.setLayout(new GridLayout(4,4,50,50));
 
-        cards_panel= new JPanel();
-        cards_panel.setLayout(new GridLayout(4,4));
+        cards_panel = new JPanel();
+        cards_panel.setLayout(new GridLayout(4, 4));
         cards_panel.setBackground(Color.MAGENTA);
-
 
 
 
         List<JButton> buttonList1 = new ArrayList<>();
 
-        for (int i=0; i < numberOfCards; i++) {
+        for (int i = 0; i < numberOfCards; i++) {
 
             JButton button = new JButton();
 
@@ -61,7 +65,7 @@ public class Board extends JFrame {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(timesClicked==0){
+                    if (timesClicked == 0) {
 
                         button.setOpaque(false);
                         button.setIcon(button.getDisabledIcon());
@@ -71,12 +75,11 @@ public class Board extends JFrame {
                         timesClicked++;
                         System.out.println(l);
                         l++;
-                    }
-                    else if(timesClicked ==1){
+                    } else if (timesClicked == 1) {
 
                         button.setOpaque(false);
                         button.setIcon(button.getDisabledIcon());
-                        if(button.getIcon().equals(tempIcon)){
+                        if (button.getIcon().equals(tempIcon)) {
                             System.out.println("YOU GOT A PAIR");
                             buttonList1.remove(button);
                             buttonList1.remove(tempButton);
@@ -85,9 +88,8 @@ public class Board extends JFrame {
                         System.out.println(l);
                         l++;
 
-                    }
-                    else if(timesClicked == 2) {
-                        for(int g=0; g <buttonList1.size(); g++) {
+                    } else if (timesClicked == 2) {
+                        for (int g = 0; g < buttonList1.size(); g++) {
 
                             buttonList1.get(g).setOpaque(true);
                             buttonList1.get(g).setContentAreaFilled(true);
@@ -104,22 +106,22 @@ public class Board extends JFrame {
         }
 
 
-
         imageList = new Icon[numberOfCards];
         for (int i = 0; i < numberOfImages; i++) {
             //image name
             String folder = "icon/image-";
             String prefix = ".png";
             String imageName = folder + i + prefix;
-            try{
+            try {
                 image = new ImageIcon(getClass().getResource(imageName));
 
-            }catch (Exception  e){
+            } catch (Exception e) {
                 System.out.println("Image cannot be found!!");
             }
             //scale the images
-            Image scaled = scaleImage(image.getImage(),100,100);
-            ImageIcon scaledImage  = new ImageIcon(scaled);
+            Image scaled = scaleImage(image.getImage(), 100, 100);
+            ImageIcon scaledImage = new ImageIcon(scaled);
+
             imageList[i] = scaledImage;
             imageList[numberOfImages + i] = scaledImage;
         }
@@ -127,11 +129,11 @@ public class Board extends JFrame {
 
         Collections.shuffle(Arrays.asList(imageList));
 
-        for(int e = 0; e < imageList.length; e ++){
+        for (int e = 0; e < imageList.length; e++) {
             buttonList1.get(e).setDisabledIcon(imageList[e]);
         }
 
-        frame.add(cards_panel,BorderLayout.CENTER);
+        frame.add(cards_panel, BorderLayout.CENTER);
         //frame.pack();
         frame.setVisible(true);
 
@@ -140,6 +142,8 @@ public class Board extends JFrame {
 
     private Image scaleImage(Image image, int w, int h) {
         return image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+
     }
 }
+
 

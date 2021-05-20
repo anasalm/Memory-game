@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TestButton{
+public class MemoryButton{
     int a;
 
     public JButton createButton(int e){
@@ -14,3 +14,4 @@ public class TestButton{
 
 
 }
+

@@ -34,8 +34,7 @@ public class HomeScreen extends JFrame implements ActionListener{
 
 
 
-        TestButton buttonInstance = new TestButton();
-        JButton button = buttonInstance.createButton(1);
+
         //button.addActionListener(this);
 /*
         label = new JLabel("antal rätt: 0");
