@@ -1,5 +1,3 @@
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -7,16 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.Delayed;
-import java.util.concurrent.TimeUnit;
+
 
 public class Board extends JFrame {
 
     private JFrame frame;
-    private JPanel panel;
+    private JPanel cards_panel;
     private final int numberOfImages =8 ;
     private final int numberOfCards = 16 ;
-    JButton[] buttonList;
+
     int l=0;
     int timesClicked = 0;
     Icon[] imageList;
@@ -26,57 +23,48 @@ public class Board extends JFrame {
 
     private  ImageIcon image;
     Board() {
-     //   boardOfButtons();
+       boardOfButtons();
     }
 
 
     public void boardOfButtons(){
 
+        Border board = BorderFactory.createLineBorder(new Color(145,153,155),2);
+
         frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Memory");
-        frame.setSize(500,500);
-        frame.setLayout(new GridLayout(4,4,50,50));
-/**
- panel =new JPanel();
- panel.setSize(4000,4000);
- panel.setBackground(Color.CYAN);
- panel.setLayout(new GridLayout(4,4,50,50));
- */
-
-        Border board = BorderFactory.createLineBorder(Color.BLACK,5);
-
-
-        List<JLabel> labelList = new ArrayList<>();
-        //JFrame frame3 = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(5000,5000);
-        frame.setLayout(new GridLayout(4,4,50,50));
+        frame.setSize(1000,1000);
+        //  frame.setLayout(new GridLayout(4,4,50,50));
 
-        buttonList = new JButton[numberOfCards];
+        cards_panel= new JPanel();
+        cards_panel.setLayout(new GridLayout(4,4));
+        cards_panel.setBackground(Color.MAGENTA);
+
+
+
+
         List<JButton> buttonList1 = new ArrayList<>();
-
-        TestButton testButton = new TestButton();
 
         for (int i=0; i < numberOfCards; i++) {
 
-            JButton button = new JButton("m" + (i + 1));
+            JButton button = new JButton();
+
             buttonList1.add(button);
-            button.setPreferredSize(new Dimension(100,100));
+            //button.setPreferredSize(new Dimension(150,150));
+            button.setFocusable(false);
             button.setBackground(Color.CYAN);
             button.setBorder(board);
+            cards_panel.add(button);
+
 
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(timesClicked==0){
-                        //  System.out.println(button.getText());
+
                         button.setOpaque(false);
-                        button.setContentAreaFilled(false);
-                        //button.setBorderPainted(false);
                         button.setIcon(button.getDisabledIcon());
-                        //button.getIcon();
-                        //  button.
                         tempIcon = button.getIcon();
                         tempButton = button;
 
@@ -85,15 +73,11 @@ public class Board extends JFrame {
                         l++;
                     }
                     else if(timesClicked ==1){
-                        //System.out.println(button.getText());
+
                         button.setOpaque(false);
-                        button.setContentAreaFilled(false);
-                        //button.setBorderPainted(false);
                         button.setIcon(button.getDisabledIcon());
                         if(button.getIcon().equals(tempIcon)){
                             System.out.println("YOU GOT A PAIR");
-                            //button.removeAll();
-                            //tempButton.removeAll();
                             buttonList1.remove(button);
                             buttonList1.remove(tempButton);
                         }
@@ -104,31 +88,24 @@ public class Board extends JFrame {
                     }
                     else if(timesClicked == 2) {
                         for(int g=0; g <buttonList1.size(); g++) {
-                            /*
-                            buttonList[g].setOpaque(true);
-                            buttonList[g].setContentAreaFilled(true);
-                            buttonList[g].setBorderPainted(true);
-                            buttonList[g].setIcon(null);
 
-                             */
                             buttonList1.get(g).setOpaque(true);
                             buttonList1.get(g).setContentAreaFilled(true);
                             buttonList1.get(g).setBorderPainted(true);
                             buttonList1.get(g).setIcon(null);
-                            //button.setIcon(button.getDisabledIcon());
+
                         }
                         timesClicked = 0;
                     }
                 }
             });
 
-            buttonList[i] = button;
-            frame.add(buttonList[i]);
+            //frame.add(buttonList1.get(i));
         }
 
 
-        imageList = new Icon[numberOfCards];
 
+        imageList = new Icon[numberOfCards];
         for (int i = 0; i < numberOfImages; i++) {
             //image name
             String folder = "icon/image-";
@@ -136,7 +113,7 @@ public class Board extends JFrame {
             String imageName = folder + i + prefix;
             try{
                 image = new ImageIcon(getClass().getResource(imageName));
-                // image = new ImageIcon(getClass().getResource("icon/color-palette.png"));
+
             }catch (Exception  e){
                 System.out.println("Image cannot be found!!");
             }
@@ -145,86 +122,24 @@ public class Board extends JFrame {
             ImageIcon scaledImage  = new ImageIcon(scaled);
             imageList[i] = scaledImage;
             imageList[numberOfImages + i] = scaledImage;
-
-
-            //Add every card two times
-            JLabel label  = new JLabel();
-            //buttonList[i].setIcon(scaledImage);
-            labelList.add(label);
-            //buttonList[i].setBorder(board);
-
-            //panel.add(scaledImage);
-
-            JLabel label1 = new JLabel();
-            //buttonList[i].setIcon(scaledImage);
-            labelList.add(label1);
-            label1.setBorder(board);
         }
+
 
         Collections.shuffle(Arrays.asList(imageList));
 
         for(int e = 0; e < imageList.length; e ++){
-            buttonList[e].setDisabledIcon(imageList[e]);
+            buttonList1.get(e).setDisabledIcon(imageList[e]);
         }
-        //
-/**
- Random rand =new Random();
- for (int j = 0; j < numberOfCards; j++) {
- int randomIndex = rand.nextInt(labelList.size());
- //panel.add(labelList.get(randomIndex));
- //frame.add(labelList.get(randomIndex));
- labelList.remove(randomIndex);
- }
- */
 
-        //frame.add(panel);
+        frame.add(cards_panel,BorderLayout.CENTER);
+        //frame.pack();
         frame.setVisible(true);
-        frame.pack();
-        frame.setVisible(true);
-        frame.pack();
-    }
-
-
-
-    /**
-     * add images to the table.
-     */
-    public void makeLabels(){
 
 
     }
+
     private Image scaleImage(Image image, int w, int h) {
-
         return image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-
-    }/**
-     *trying to make a new frame with buttons. when we click the buttons a card will show up
-     */
-
-
-    public static void main(String[] args) {
-        Board board = new Board();
-        //board.boardVisible();
-        //board.makeLabels();
-        board.boardOfButtons();
-    }
-
-    public void boardVisible(){
-
-        JFrame frame1 = new JFrame();
-        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame1.setSize(500,500);
-        frame1.setLayout(new GridLayout(3,3,2,2));
-        for (int i = 0; i < 9; i++) {
-            JLabel labelTest = new JLabel("hej");
-            frame1.add(labelTest);
-        }
-        //frame1.setVisible(true);
-    }
-
-
-
-    public void whatHappensWhenClicked(){
-
     }
 }
+
