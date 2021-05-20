@@ -10,12 +10,15 @@ import java.util.List;
 
 public class Board extends JFrame {
 
-    private JFrame frame;
+    private JFrame frame= new JFrame();
     private JPanel cards_panel;
     private JPanel titlePanel;
     private JLabel textField;
-    private final int numberOfImages = 8;
-    private final int numberOfCards = 16;
+    private JPanel difficulty_panel;
+    private  int numberOfImages;
+    private  int numberOfCards;
+    private int numberOfRows;
+    private int numberOfCols;
 
     private int numberOfPair = 0;
 
@@ -28,17 +31,75 @@ public class Board extends JFrame {
     private ImageIcon image;
 
     Board() {
-        boardOfButtons();
+        DifficultyScreen();
+        //boardOfButtons();
     }
 
 
-    public void boardOfButtons() {
-        Border board = BorderFactory.createLineBorder(new Color(75, 25, 146, 133), 2);
 
-        frame = new JFrame();
+    public void DifficultyScreen(){
         frame.setTitle("Memory");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
+    difficulty_panel = new JPanel();
+    difficulty_panel.setSize(new Dimension(300,300));
+    difficulty_panel.setLayout(new GridLayout(4,1));
+    JButton level1= new JButton("Level 1");
+    level1.setBackground(new Color(1, 248, 148));
+    JButton level2= new JButton("Level 2");
+    level2.setBackground(new Color(1, 248, 148));
+    JButton level3= new JButton("Level 3");
+    level3.setBackground(new Color(1, 248, 148));
+        JButton level4= new JButton("Level 3");
+        level4.setBackground(new Color(1, 248, 148));
+    level1.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boardOfButtons(8,4,4);
+        }
+    });
+        level2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boardOfButtons(10,4,5);
+            }
+        });
+        level3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boardOfButtons(15,5,6);
+            }
+        });
+        level4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boardOfButtons(18,6,6);
+            }
+        });
+
+    difficulty_panel.add(level1);
+    difficulty_panel.add(level2);
+    difficulty_panel.add(level3);
+    difficulty_panel.add(level4);
+
+
+    frame.add(difficulty_panel,BorderLayout.CENTER );
+    frame.setVisible(true);
+
+
+    }
+
+
+    public void boardOfButtons(int numberOfImages, int numberOfCols, int numberOfRows) {
+        Border board = BorderFactory.createLineBorder(new Color(75, 25, 146, 133), 2);
+        this.numberOfImages =  numberOfImages;
+        this.numberOfCards = 2*numberOfImages;
+        this.numberOfCols = numberOfCols;
+        this.numberOfRows = numberOfRows;
+
+
+        frame.remove(difficulty_panel);
+        frame.repaint();
 
 
         textField =new JLabel();
@@ -54,7 +115,7 @@ public class Board extends JFrame {
         titlePanel.setBounds(0,0,1000,100);
 
         cards_panel = new JPanel();
-        cards_panel.setLayout(new GridLayout(4, 4));
+        cards_panel.setLayout(new GridLayout(numberOfRows, numberOfCols));
         cards_panel.setBackground(new Color(1, 248, 148));
 
         List<JButton> buttonList = new ArrayList<>();
@@ -153,13 +214,10 @@ public class Board extends JFrame {
         frame.setVisible(true);
     }
     public void playAgain(){
-        try {
-            Thread.sleep(2000);
-        }catch (InterruptedException m){
-            m.printStackTrace();
-        }
+
         frame.remove(cards_panel);
         frame.repaint();
+
     }
 
     private Image scaleImage(Image image, int w, int h) {

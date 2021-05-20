@@ -6,14 +6,22 @@ import java.awt.event.ActionListener;
 public class HomeScreen extends JFrame implements ActionListener{
     private JButton startButton;
     private JPanel panel;
-    private JFrame frame;
+    //private JFrame frame;
+    private JPanel Difficulty_panel;
 
     int count =0;
     JLabel label;
 
     public HomeScreen(){
 
-       // trying to
+
+
+
+
+
+
+
+
 
         startButton = new JButton("Start");
         startButton.setFocusable(false);//Vet inte vad den här gör
@@ -23,6 +31,8 @@ public class HomeScreen extends JFrame implements ActionListener{
         panel = new JPanel();
         panel.add(startButton);
 
+
+/*
         frame = new JFrame();
         frame.add(panel, BorderLayout.SOUTH);
         frame.setTitle("Memory");
@@ -31,6 +41,8 @@ public class HomeScreen extends JFrame implements ActionListener{
         frame.setVisible(true);
         frame.pack();
 
+
+ */
 
 
 
@@ -44,9 +56,11 @@ public class HomeScreen extends JFrame implements ActionListener{
     ( let's start with just 16 images) will come up and the timer will start.
      */
     public void Start() {
-
+/*
        frame.remove(startButton);
        frame.dispose();
+
+ */
 
     }
     @Override
@@ -54,13 +68,7 @@ public class HomeScreen extends JFrame implements ActionListener{
         System.out.println("let's start");
         Start();
         if(e.getSource()==startButton){
-
         }
-
-
     }
-    public static void main(String[] args) {
 
-        Board board = new Board();
-    }
 }
