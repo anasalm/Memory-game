@@ -35,22 +35,7 @@ public class HomeScreen extends JFrame implements ActionListener{
 
 
 
-        //button.addActionListener(this);
-/*
-        label = new JLabel("antal rätt: 0");
 
-
-        JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 50, 100));
-        panel.setLayout(new GridLayout(2,3));
-        panel.add(button);
-        panel.add(label);
-
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
- */
     }
 
     /**
@@ -59,16 +44,10 @@ public class HomeScreen extends JFrame implements ActionListener{
     ( let's start with just 16 images) will come up and the timer will start.
      */
     public void Start() {
-        //HomeScreen homeScreen = new HomeScreen();
-        //frame.remove(panel);
-       // HomeScreen(false)
 
        frame.remove(startButton);
        frame.dispose();
 
-     //  repaint();
-       //frame.setVisible(true);
-        System.out.println("hej");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -81,7 +60,7 @@ public class HomeScreen extends JFrame implements ActionListener{
 
     }
     public static void main(String[] args) {
-        //new HomeScreen();
+
         Board board = new Board();
     }
 }

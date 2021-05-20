@@ -16,6 +16,7 @@ public class Board extends JFrame {
     private JLabel textField;
     private final int numberOfImages = 8;
     private final int numberOfCards = 16;
+
     private int numberOfPair = 0;
 
     Icon[] imageList;
@@ -41,8 +42,8 @@ public class Board extends JFrame {
 
 
         textField =new JLabel();
-        textField.setBackground(new Color(14, 120, 227));
-        textField.setForeground(new Color(227, 19, 227));
+        textField.setBackground(new Color(255, 255, 255));
+        textField.setForeground(new Color(10, 10, 10));
         textField.setFont(new Font("Ink Free", Font.BOLD,75));
         textField.setHorizontalAlignment(JLabel.CENTER);
         textField.setText("Let's start!!");
@@ -54,7 +55,7 @@ public class Board extends JFrame {
 
         cards_panel = new JPanel();
         cards_panel.setLayout(new GridLayout(4, 4));
-        cards_panel.setBackground(new Color(31, 206, 12));
+        cards_panel.setBackground(new Color(1, 248, 148));
 
         List<JButton> buttonList = new ArrayList<>();
 
@@ -64,7 +65,7 @@ public class Board extends JFrame {
 
             buttonList.add(button);
             button.setFocusable(false);
-            button.setBackground(new Color(4, 4, 10));
+            button.setBackground(new Color(19, 206, 186));
             button.setBorder(board);
             cards_panel.add(button);
 
@@ -82,7 +83,7 @@ public class Board extends JFrame {
                         }catch (InterruptedException m){
                             m.printStackTrace();
                         }
-                        button.setOpaque(true);
+                        button.setOpaque(false);
                         button.setIcon(button.getDisabledIcon());
                         tempIcon = button.getIcon();
                         tempButton = button;
@@ -94,7 +95,7 @@ public class Board extends JFrame {
                         if (button.equals(tempButton)) {
                             return;
                         } else {
-                            button.setOpaque(true);
+                            button.setOpaque(false);
                             button.setIcon(button.getDisabledIcon());
                             if (button.getIcon().equals(tempIcon)) {
                                 textField.setText("YOU GOT A PAIR");
@@ -106,13 +107,12 @@ public class Board extends JFrame {
 
                                 if(numberOfPair==numberOfImages){
                                     textField.setText("YOU WIN");
+                                    playAgain();
                                 }
                             } else {
                                 textField.setText("Try again");
                             }
-
                             timesClicked=0;
-
                         }
                     }
                 }
@@ -141,7 +141,7 @@ public class Board extends JFrame {
         }
 
 
-        Collections.shuffle(Arrays.asList(imageList));
+        //Collections.shuffle(Arrays.asList(imageList));
 
         for (int e = 0; e < imageList.length; e++) {
             buttonList.get(e).setDisabledIcon(imageList[e]);
@@ -151,6 +151,15 @@ public class Board extends JFrame {
         frame.add(titlePanel, BorderLayout.NORTH);
         frame.add(cards_panel);
         frame.setVisible(true);
+    }
+    public void playAgain(){
+        try {
+            Thread.sleep(2000);
+        }catch (InterruptedException m){
+            m.printStackTrace();
+        }
+        frame.remove(cards_panel);
+        frame.repaint();
     }
 
     private Image scaleImage(Image image, int w, int h) {
