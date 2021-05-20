@@ -6,3 +6,11 @@ he/she will be rewarded with points based on time, and accuracy. In the
 future we will add difficulty-settings and different levels
 
 
+## To play the game:
+Clone the repo
+*$ git clone git@gits-15.sys.kth.se:anasa/Memory_Anton_Anas.git*
+
+Then simply run the main method in the *Board* class
+
+**Additional information**
+The gui was made with the java.swing library
