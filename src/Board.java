@@ -12,16 +12,17 @@ public class Board extends JFrame {
 
     private JFrame frame;
     private JPanel cards_panel;
+    private JPanel titlePanel;
+    private JLabel textField;
     private final int numberOfImages = 8;
     private final int numberOfCards = 16;
+    private int numberOfPair = 0;
 
-
-    int l = 0;
-    int timesClicked = 0;
     Icon[] imageList;
     Icon tempIcon;
     JButton tempButton;
 
+    int timesClicked = 0;
 
     private ImageIcon image;
 
@@ -31,33 +32,39 @@ public class Board extends JFrame {
 
 
     public void boardOfButtons() {
-
-        Border board = BorderFactory.createLineBorder(new Color(145, 153, 155), 2);
-
+        Border board = BorderFactory.createLineBorder(new Color(75, 25, 146, 133), 2);
 
         frame = new JFrame();
         frame.setTitle("Memory");
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
-        //  frame.setLayout(new GridLayout(4,4,50,50));
+
+
+        textField =new JLabel();
+        textField.setBackground(new Color(14, 120, 227));
+        textField.setForeground(new Color(227, 19, 227));
+        textField.setFont(new Font("Ink Free", Font.BOLD,75));
+        textField.setHorizontalAlignment(JLabel.CENTER);
+        textField.setText("Let's start!!");
+        textField.setOpaque(true);
+
+        titlePanel = new JPanel();
+        titlePanel.setLayout(new BorderLayout());
+        titlePanel.setBounds(0,0,1000,100);
 
         cards_panel = new JPanel();
         cards_panel.setLayout(new GridLayout(4, 4));
-        cards_panel.setBackground(Color.MAGENTA);
+        cards_panel.setBackground(new Color(31, 206, 12));
 
-
-
-        List<JButton> buttonList1 = new ArrayList<>();
+        List<JButton> buttonList = new ArrayList<>();
 
         for (int i = 0; i < numberOfCards; i++) {
 
             JButton button = new JButton();
 
-            buttonList1.add(button);
-            //button.setPreferredSize(new Dimension(150,150));
+            buttonList.add(button);
             button.setFocusable(false);
-            button.setBackground(Color.CYAN);
+            button.setBackground(new Color(4, 4, 10));
             button.setBorder(board);
             cards_panel.add(button);
 
@@ -66,43 +73,50 @@ public class Board extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (timesClicked == 0) {
-
-                        button.setOpaque(false);
+                        for (int g = 0; g < buttonList.size(); g++) {
+                            buttonList.get(g).setOpaque(true);
+                            buttonList.get(g).setIcon(null);
+                        }
+                        try {
+                            Thread.sleep(200);
+                        }catch (InterruptedException m){
+                            m.printStackTrace();
+                        }
+                        button.setOpaque(true);
                         button.setIcon(button.getDisabledIcon());
                         tempIcon = button.getIcon();
                         tempButton = button;
 
                         timesClicked++;
-                        System.out.println(l);
-                        l++;
+                        textField.setText("ONE MORE TIME");
+
                     } else if (timesClicked == 1) {
+                        if (button.equals(tempButton)) {
+                            return;
+                        } else {
+                            button.setOpaque(true);
+                            button.setIcon(button.getDisabledIcon());
+                            if (button.getIcon().equals(tempIcon)) {
+                                textField.setText("YOU GOT A PAIR");
+                                numberOfPair++;
+                                button.setEnabled(false);
+                                tempButton.setEnabled(false);
+                                buttonList.remove(button);
+                                buttonList.remove(tempButton);
 
-                        button.setOpaque(false);
-                        button.setIcon(button.getDisabledIcon());
-                        if (button.getIcon().equals(tempIcon)) {
-                            System.out.println("YOU GOT A PAIR");
-                            buttonList1.remove(button);
-                            buttonList1.remove(tempButton);
+                                if(numberOfPair==numberOfImages){
+                                    textField.setText("YOU WIN");
+                                }
+                            } else {
+                                textField.setText("Try again");
+                            }
+
+                            timesClicked=0;
+
                         }
-                        timesClicked++;
-                        System.out.println(l);
-                        l++;
-
-                    } else if (timesClicked == 2) {
-                        for (int g = 0; g < buttonList1.size(); g++) {
-
-                            buttonList1.get(g).setOpaque(true);
-                            buttonList1.get(g).setContentAreaFilled(true);
-                            buttonList1.get(g).setBorderPainted(true);
-                            buttonList1.get(g).setIcon(null);
-
-                        }
-                        timesClicked = 0;
                     }
                 }
             });
-
-            //frame.add(buttonList1.get(i));
         }
 
 
@@ -130,19 +144,21 @@ public class Board extends JFrame {
         Collections.shuffle(Arrays.asList(imageList));
 
         for (int e = 0; e < imageList.length; e++) {
-            buttonList1.get(e).setDisabledIcon(imageList[e]);
+            buttonList.get(e).setDisabledIcon(imageList[e]);
         }
 
-        frame.add(cards_panel, BorderLayout.CENTER);
-        //frame.pack();
+        titlePanel.add(textField);
+        frame.add(titlePanel, BorderLayout.NORTH);
+        frame.add(cards_panel);
         frame.setVisible(true);
-
-
     }
 
     private Image scaleImage(Image image, int w, int h) {
         return image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+    }
 
+    public static void main(String[] args) {
+        Board board = new Board();
     }
 }
 

@@ -22,5 +22,7 @@ public class staticFrame {
         frame.setVisible(true);
         frame.setTitle("Game");
         return frame;
+
+
     }
 }

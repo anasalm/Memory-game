@@ -75,12 +75,13 @@ public class HomeScreen extends JFrame implements ActionListener{
         System.out.println("let's start");
         Start();
         if(e.getSource()==startButton){
-            Board board = new Board();
+
         }
 
 
     }
     public static void main(String[] args) {
-        new HomeScreen();
+        //new HomeScreen();
+        Board board = new Board();
     }
 }

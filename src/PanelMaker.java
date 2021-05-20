@@ -11,4 +11,6 @@ public class PanelMaker {
         panel.add(label);
         return panel;
     }
+
+
 }
