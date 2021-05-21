@@ -39,7 +39,13 @@ public class Board extends JFrame {
         DifficultyScreen();
     }
 
-
+    /**
+     * Make a home screen with four buttons for the different difficulty levels.
+     * Level 1 is 4x4
+     * Level 2 is 4x5
+     * Level 3 is 5x6
+     * Level 4 is 6x6
+     */
     public void DifficultyScreen() {
         clicksCounter = 0;
         pairCounter = 0;
@@ -91,8 +97,6 @@ public class Board extends JFrame {
 
         frame.add(difficulty_panel, BorderLayout.CENTER);
         frame.setVisible(true);
-
-
     }
 
 
@@ -113,12 +117,8 @@ public class Board extends JFrame {
         textField.setForeground(new Color(10, 10, 10));
         textField.setFont(new Font("Ink Free", Font.BOLD, 75));
         textField.setHorizontalAlignment(JLabel.CENTER);
-        //String text  =   + '\n'+ "number of clicks";
-        //System.out.println(text);
         textField.setText("Let's start!!");
         textField.setOpaque(true);
-
-
 
 
         titlePanel = new JPanel();
@@ -163,7 +163,6 @@ public class Board extends JFrame {
                         tempButton = button;
 
                         timesClicked++;
-                        //textField.setText("ONE MORE TIME");
                         textField.setText("Number of clicks: "+ clicksCounter)  ;
 
                     } else if (timesClicked == 1) {
@@ -183,14 +182,10 @@ public class Board extends JFrame {
                                 buttonList.remove(tempButton);
 
                                 if (numberOfPair == numberOfImages) {
-                                    //JTextArea textarea = new JTextArea ("1\n2\n3\n"+"4\n");
-                                    //textField.setText("YOU WIN " +" Number of pair: "+ pairCounter + "Number of ckicks: "+ clicksCounter);
-                                    textField.setText("<html>YOU WIN <br>Number of pair: </html>" );
                                     playAgain();
                                 }
                             } else {
-                                textField.setText("Try again");
-                                textField.setText("Number of ckicks: "+ clicksCounter);
+                                textField.setText("Number of clicks: "+ clicksCounter);
                             }
                             timesClicked = 0;
                         }
@@ -226,12 +221,10 @@ public class Board extends JFrame {
         for (int e = 0; e < imageList.length; e++) {
             buttonList.get(e).setDisabledIcon(imageList[e]);
         }
-
         titlePanel.add(textField);
         frame.add(titlePanel, BorderLayout.NORTH);
         frame.add(cards_panel);
         frame.setVisible(true);
-
     }
 
     public void playAgain() {
