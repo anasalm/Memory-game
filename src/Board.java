@@ -14,13 +14,18 @@ public class Board extends JFrame {
     private JPanel cards_panel;
     private JPanel titlePanel;
     private JLabel textField;
+    private JLabel numberOfClicks;
     private JPanel difficulty_panel;
     private int numberOfImages;
     private int numberOfCards;
     private int numberOfRows;
     private int numberOfCols;
+    private int clicksCounter;
+    private int pairCounter;
+
 
     private int numberOfPair = 0;
+
 
     Icon[] imageList;
     Icon tempIcon;
@@ -36,6 +41,9 @@ public class Board extends JFrame {
 
 
     public void DifficultyScreen() {
+        clicksCounter = 0;
+        pairCounter = 0;
+
         frame.setTitle("Memory");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
@@ -48,7 +56,7 @@ public class Board extends JFrame {
         level2.setBackground(new Color(1, 248, 148));
         JButton level3 = new JButton("Level 3");
         level3.setBackground(new Color(221, 229, 14));
-        JButton level4 = new JButton("Level 3");
+        JButton level4 = new JButton("Level 4");
         level4.setBackground(new Color(1, 248, 148));
         level1.addActionListener(new ActionListener() {
             @Override
@@ -105,8 +113,13 @@ public class Board extends JFrame {
         textField.setForeground(new Color(10, 10, 10));
         textField.setFont(new Font("Ink Free", Font.BOLD, 75));
         textField.setHorizontalAlignment(JLabel.CENTER);
+        //String text  =   + '\n'+ "number of clicks";
+        //System.out.println(text);
         textField.setText("Let's start!!");
         textField.setOpaque(true);
+
+
+
 
         titlePanel = new JPanel();
         titlePanel.setLayout(new BorderLayout());
@@ -132,6 +145,8 @@ public class Board extends JFrame {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+
+                    clicksCounter++;
                     if (timesClicked == 0) {
                         for (int g = 0; g < buttonList.size(); g++) {
                             buttonList.get(g).setOpaque(true);
@@ -148,7 +163,8 @@ public class Board extends JFrame {
                         tempButton = button;
 
                         timesClicked++;
-                        textField.setText("ONE MORE TIME");
+                        //textField.setText("ONE MORE TIME");
+                        textField.setText("Number of ckicks: "+ clicksCounter)  ;
 
                     } else if (timesClicked == 1) {
                         if (button.equals(tempButton)) {
@@ -157,7 +173,9 @@ public class Board extends JFrame {
                             button.setOpaque(false);
                             button.setIcon(button.getDisabledIcon());
                             if (button.getIcon().equals(tempIcon)) {
-                                textField.setText("YOU GOT A PAIR");
+                                pairCounter++;
+                                //textField.setText("YOU GOT A PAIR");
+                                textField.setText("Number of pair: "+ pairCounter);
                                 numberOfPair++;
                                 button.setEnabled(false);
                                 tempButton.setEnabled(false);
@@ -165,11 +183,14 @@ public class Board extends JFrame {
                                 buttonList.remove(tempButton);
 
                                 if (numberOfPair == numberOfImages) {
-                                    textField.setText("YOU WIN");
+                                    //JTextArea textarea = new JTextArea ("1\n2\n3\n"+"4\n");
+                                    //textField.setText("YOU WIN " +" Number of pair: "+ pairCounter + "Number of ckicks: "+ clicksCounter);
+                                    textField.setText("<html>YOU WIN <br>Number of pair: </html>" );
                                     playAgain();
                                 }
                             } else {
                                 textField.setText("Try again");
+                                textField.setText("Number of ckicks: "+ clicksCounter);
                             }
                             timesClicked = 0;
                         }
@@ -200,7 +221,7 @@ public class Board extends JFrame {
         }
 
 
-        Collections.shuffle(Arrays.asList(imageList));
+        //Collections.shuffle(Arrays.asList(imageList));
 
         for (int e = 0; e < imageList.length; e++) {
             buttonList.get(e).setDisabledIcon(imageList[e]);
@@ -210,12 +231,17 @@ public class Board extends JFrame {
         frame.add(titlePanel, BorderLayout.NORTH);
         frame.add(cards_panel);
         frame.setVisible(true);
+
     }
 
     public void playAgain() {
 
         frame.remove(cards_panel);
         titlePanel.setBounds(0, 0, 1000, 500);
+        clicksCounter=0;
+        pairCounter=0;
+        numberOfPair=0;
+        textField.setText("let's start again!!");
         frame.add(difficulty_panel);
         frame.repaint();
 
