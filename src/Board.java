@@ -51,13 +51,13 @@ public class Board extends JFrame {
         difficulty_panel.setSize(new Dimension(300, 300));
         difficulty_panel.setLayout(new GridLayout(4, 1));
         JButton level1 = new JButton("Level 1");
-        level1.setBackground(new Color(221, 229, 14));
+        level1.setBackground(new Color(20, 180, 200));
         JButton level2 = new JButton("Level 2");
-        level2.setBackground(new Color(1, 248, 148));
+        level2.setBackground(new Color(20, 165, 200));
         JButton level3 = new JButton("Level 3");
-        level3.setBackground(new Color(221, 229, 14));
+        level3.setBackground(new Color(20, 150, 200));
         JButton level4 = new JButton("Level 4");
-        level4.setBackground(new Color(1, 248, 148));
+        level4.setBackground(new Color(20, 135, 200));
         level1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -164,7 +164,7 @@ public class Board extends JFrame {
 
                         timesClicked++;
                         //textField.setText("ONE MORE TIME");
-                        textField.setText("Number of ckicks: "+ clicksCounter)  ;
+                        textField.setText("Number of clicks: "+ clicksCounter)  ;
 
                     } else if (timesClicked == 1) {
                         if (button.equals(tempButton)) {
@@ -221,7 +221,7 @@ public class Board extends JFrame {
         }
 
 
-        //Collections.shuffle(Arrays.asList(imageList));
+        Collections.shuffle(Arrays.asList(imageList));
 
         for (int e = 0; e < imageList.length; e++) {
             buttonList.get(e).setDisabledIcon(imageList[e]);
@@ -251,9 +251,5 @@ public class Board extends JFrame {
         return image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
     }
 
-    public static void main(String[] args) {
-        Board board = new Board();
-    }
+
 }
-
-
