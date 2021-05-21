@@ -10,13 +10,13 @@ import java.util.List;
 
 public class Board extends JFrame {
 
-    private JFrame frame= new JFrame();
+    private JFrame frame = new JFrame();
     private JPanel cards_panel;
     private JPanel titlePanel;
     private JLabel textField;
     private JPanel difficulty_panel;
-    private  int numberOfImages;
-    private  int numberOfCards;
+    private int numberOfImages;
+    private int numberOfCards;
     private int numberOfRows;
     private int numberOfCols;
 
@@ -32,59 +32,57 @@ public class Board extends JFrame {
 
     Board() {
         DifficultyScreen();
-        //boardOfButtons();
     }
 
 
-
-    public void DifficultyScreen(){
+    public void DifficultyScreen() {
         frame.setTitle("Memory");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 1000);
-    difficulty_panel = new JPanel();
-    difficulty_panel.setSize(new Dimension(300,300));
-    difficulty_panel.setLayout(new GridLayout(4,1));
-    JButton level1= new JButton("Level 1");
-    level1.setBackground(new Color(1, 248, 148));
-    JButton level2= new JButton("Level 2");
-    level2.setBackground(new Color(1, 248, 148));
-    JButton level3= new JButton("Level 3");
-    level3.setBackground(new Color(1, 248, 148));
-        JButton level4= new JButton("Level 3");
+        frame.setSize(800, 800);
+        difficulty_panel = new JPanel();
+        difficulty_panel.setSize(new Dimension(300, 300));
+        difficulty_panel.setLayout(new GridLayout(4, 1));
+        JButton level1 = new JButton("Level 1");
+        level1.setBackground(new Color(221, 229, 14));
+        JButton level2 = new JButton("Level 2");
+        level2.setBackground(new Color(1, 248, 148));
+        JButton level3 = new JButton("Level 3");
+        level3.setBackground(new Color(221, 229, 14));
+        JButton level4 = new JButton("Level 3");
         level4.setBackground(new Color(1, 248, 148));
-    level1.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            boardOfButtons(8,4,4);
-        }
-    });
+        level1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boardOfButtons(8, 4, 4);
+            }
+        });
         level2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boardOfButtons(10,4,5);
+                boardOfButtons(10, 4, 5);
             }
         });
         level3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boardOfButtons(15,5,6);
+                boardOfButtons(15, 5, 6);
             }
         });
         level4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boardOfButtons(18,6,6);
+                boardOfButtons(18, 6, 6);
             }
         });
 
-    difficulty_panel.add(level1);
-    difficulty_panel.add(level2);
-    difficulty_panel.add(level3);
-    difficulty_panel.add(level4);
+        difficulty_panel.add(level1);
+        difficulty_panel.add(level2);
+        difficulty_panel.add(level3);
+        difficulty_panel.add(level4);
 
 
-    frame.add(difficulty_panel,BorderLayout.CENTER );
-    frame.setVisible(true);
+        frame.add(difficulty_panel, BorderLayout.CENTER);
+        frame.setVisible(true);
 
 
     }
@@ -92,8 +90,8 @@ public class Board extends JFrame {
 
     public void boardOfButtons(int numberOfImages, int numberOfCols, int numberOfRows) {
         Border board = BorderFactory.createLineBorder(new Color(75, 25, 146, 133), 2);
-        this.numberOfImages =  numberOfImages;
-        this.numberOfCards = 2*numberOfImages;
+        this.numberOfImages = numberOfImages;
+        this.numberOfCards = 2 * numberOfImages;
         this.numberOfCols = numberOfCols;
         this.numberOfRows = numberOfRows;
 
@@ -102,21 +100,21 @@ public class Board extends JFrame {
         frame.repaint();
 
 
-        textField =new JLabel();
+        textField = new JLabel();
         textField.setBackground(new Color(255, 255, 255));
         textField.setForeground(new Color(10, 10, 10));
-        textField.setFont(new Font("Ink Free", Font.BOLD,75));
+        textField.setFont(new Font("Ink Free", Font.BOLD, 75));
         textField.setHorizontalAlignment(JLabel.CENTER);
         textField.setText("Let's start!!");
         textField.setOpaque(true);
 
         titlePanel = new JPanel();
         titlePanel.setLayout(new BorderLayout());
-        titlePanel.setBounds(0,0,1000,100);
+        titlePanel.setBounds(0, 0, 1000, 100);
 
         cards_panel = new JPanel();
         cards_panel.setLayout(new GridLayout(numberOfRows, numberOfCols));
-        cards_panel.setBackground(new Color(1, 248, 148));
+        cards_panel.setBackground(new Color(1, 248, 219));
 
         List<JButton> buttonList = new ArrayList<>();
 
@@ -141,7 +139,7 @@ public class Board extends JFrame {
                         }
                         try {
                             Thread.sleep(200);
-                        }catch (InterruptedException m){
+                        } catch (InterruptedException m) {
                             m.printStackTrace();
                         }
                         button.setOpaque(false);
@@ -166,14 +164,14 @@ public class Board extends JFrame {
                                 buttonList.remove(button);
                                 buttonList.remove(tempButton);
 
-                                if(numberOfPair==numberOfImages){
+                                if (numberOfPair == numberOfImages) {
                                     textField.setText("YOU WIN");
                                     playAgain();
                                 }
                             } else {
                                 textField.setText("Try again");
                             }
-                            timesClicked=0;
+                            timesClicked = 0;
                         }
                     }
                 }
@@ -202,7 +200,7 @@ public class Board extends JFrame {
         }
 
 
-        //Collections.shuffle(Arrays.asList(imageList));
+        Collections.shuffle(Arrays.asList(imageList));
 
         for (int e = 0; e < imageList.length; e++) {
             buttonList.get(e).setDisabledIcon(imageList[e]);
@@ -213,9 +211,12 @@ public class Board extends JFrame {
         frame.add(cards_panel);
         frame.setVisible(true);
     }
-    public void playAgain(){
+
+    public void playAgain() {
 
         frame.remove(cards_panel);
+        titlePanel.setBounds(0, 0, 1000, 500);
+        frame.add(difficulty_panel);
         frame.repaint();
 
     }
