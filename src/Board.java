@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.List;
 
 // Jag skriver det här bara för att kolla att github fungerar :)
+//en ny ändring för att kolla om jag kan pusha från terminal i VS
 public class Board extends JFrame {
 
     private JFrame frame = new JFrame();
