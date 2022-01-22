@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
-
+// Jag skriver det här bara för att kolla att github fungerar :)
 public class Board extends JFrame {
 
     private JFrame frame = new JFrame();
