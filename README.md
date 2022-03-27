@@ -8,7 +8,7 @@ In the future we will add timer and clicks counter.
 ## To play the game:
 Clone the repo
 
-*$ git clone git@github.com:anasalm/Memory-game.git
+git clone git@github.com:anasalm/Memory-game.git
 
 Then simply run the Main  class
 
